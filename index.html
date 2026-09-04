@@ -1,1 +1,100 @@
-const DATA_URL = 'https://raw.githubusercontent.com/<YOUR-USERNAME>/nse-delivery-terminal/main/market_data.json';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Money Delivery Terminal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col">
+
+    <header class="bg-slate-900 border-b border-slate-800 px-6 py-3.5 sticky top-0 z-30 flex justify-between items-center">
+        <div class="flex items-center space-x-3">
+            <div class="bg-gradient-to-tr from-cyan-600 to-blue-600 p-2.5 rounded-xl text-white">
+                <i class="fa-solid fa-layer-group text-lg"></i>
+            </div>
+            <div>
+                <h1 class="text-lg font-bold text-white">SMART MONEY <span class="text-cyan-400">TERMINAL</span></h1>
+                <p class="text-xs text-slate-400">Live Delivery Data</p>
+            </div>
+        </div>
+        <button onclick="fetchMarketData()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 px-3 py-1.5 rounded-lg text-xs font-medium transition">
+            <i class="fa-solid fa-rotate-right mr-1.5"></i>Refresh Data
+        </button>
+    </header>
+
+    <main class="flex-1 p-6 max-w-7xl mx-auto w-full">
+        <div class="bg-slate-900/90 border border-slate-800 rounded-xl overflow-hidden shadow-2xl">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs border-collapse">
+                    <thead>
+                        <tr class="bg-slate-950/70 text-slate-400 uppercase font-semibold border-b border-slate-800">
+                            <th class="p-3.5">Symbol</th>
+                            <th class="p-3.5 text-right">LTP (₹)</th>
+                            <th class="p-3.5 text-right">Change %</th>
+                            <th class="p-3.5 text-right">Turnover (Cr)</th>
+                            <th class="p-3.5 w-44">Delivery %</th>
+                            <th class="p-3.5 text-center">Signal</th>
+                        </tr>
+                    </thead>
+                    <tbody id="stocksTableBody" class="divide-y divide-slate-800/60 font-medium">
+                        <tr><td colspan="6" class="p-8 text-center text-slate-500">Loading daily market data...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // This is your exact GitHub data link
+        const DATA_URL = 'https://raw.githubusercontent.com/kira-stockmarket/Nsedelivery/main/market_data.json';
+
+        async function fetchMarketData() {
+            try {
+                const response = await fetch(DATA_URL);
+                if (!response.ok) throw new Error("Data not ready yet");
+                const data = await response.json();
+                
+                const tbody = document.getElementById('stocksTableBody');
+                tbody.innerHTML = ''; 
+                
+                data.forEach(s => {
+                    const isAcc = s.change >= 0;
+                    const signalText = isAcc ? 'Accumulation' : 'Distribution';
+                    const color = isAcc ? 'emerald' : 'rose';
+                    
+                    const row = `
+                        <tr class="hover:bg-slate-800/40 border-b border-slate-800/40">
+                            <td class="p-3.5 font-bold text-white mono">${s.symbol}</td>
+                            <td class="p-3.5 text-right mono">₹${s.ltp.toFixed(2)}</td>
+                            <td class="p-3.5 text-right mono text-${color}-400">${s.change > 0 ? '+' : ''}${s.change.toFixed(2)}%</td>
+                            <td class="p-3.5 text-right mono">₹${s.turnoverCr.toFixed(1)}</td>
+                            <td class="p-3.5">
+                                <div class="flex justify-between mb-1 mono text-[11px]"><span class="font-bold text-white">${s.delivery.toFixed(1)}%</span></div>
+                                <div class="w-full bg-slate-800 rounded-full h-1.5"><div class="bg-${color}-500 h-1.5 rounded-full" style="width: ${s.delivery}%"></div></div>
+                            </td>
+                            <td class="p-3.5 text-center">
+                                <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-${color}-500/10 text-${color}-400 border border-${color}-500/20">${signalText}</span>
+                            </td>
+                        </tr>
+                    `;
+                    tbody.insertAdjacentHTML('beforeend', row);
+                });
+            } catch (error) {
+                document.getElementById('stocksTableBody').innerHTML = `<tr><td colspan="6" class="p-8 text-center text-slate-500">Data for today has not been generated yet. Please trigger the Python script.</td></tr>`;
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', fetchMarketData);
+    </script>
+</body>
+</html>
