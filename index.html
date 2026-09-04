@@ -3,16 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>High-Volume ETF Momentum Terminal</title>
+    <title>Actionable ETF Trading Terminal</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; }
         .mono { font-family: 'JetBrains Mono', monospace; }
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: #0f172a; }
-        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
     </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col">
@@ -20,62 +17,50 @@
     <!-- Header -->
     <header class="bg-slate-900 border-b border-slate-800 px-6 py-4 sticky top-0 z-30 flex flex-wrap justify-between items-center gap-4">
         <div class="flex items-center space-x-3">
-            <div class="bg-gradient-to-tr from-cyan-600 to-blue-600 p-2.5 rounded-xl text-white shadow-lg">
-                <i class="fa-solid fa-chart-pie text-lg"></i>
+            <div class="bg-gradient-to-tr from-emerald-600 to-cyan-600 p-2.5 rounded-xl text-white shadow-lg">
+                <i class="fa-solid fa-bullseye text-lg"></i>
             </div>
             <div>
-                <h1 class="text-xl font-bold text-white tracking-tight">HIGH-VOLUME ETF <span class="text-cyan-400">TERMINAL</span></h1>
-                <p class="text-xs text-slate-400">Strictly Liquid Institutional ETFs (>₹10 Cr Turnover)</p>
+                <h1 class="text-xl font-bold text-white tracking-tight">ACTIONABLE ETF <span class="text-cyan-400">TERMINAL</span></h1>
+                <p class="text-xs text-slate-400">Institutional Volume Surge & Trade Signals</p>
             </div>
         </div>
-        <div class="flex items-center space-x-4">
-            <div class="text-right hidden sm:block">
-                <div class="text-[10px] text-slate-400 font-bold uppercase">Strategy Filter</div>
-                <div class="text-xs font-bold text-cyan-400 mono">Active Liquidity Floor</div>
-            </div>
-            <button onclick="init()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-4 py-2 rounded-lg text-sm font-medium transition">
-                <i class="fa-solid fa-rotate-right mr-1.5"></i>Sync
-            </button>
-        </div>
+        <button onclick="init()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-4 py-2 rounded-lg text-sm font-medium transition">
+            <i class="fa-solid fa-rotate-right mr-1.5"></i>Sync Data
+        </button>
     </header>
 
-    <!-- Main Container -->
     <main class="flex-1 p-6 max-w-7xl mx-auto w-full space-y-4">
         
-        <!-- Controls & Search -->
-        <div class="flex flex-wrap justify-between items-center gap-4 bg-slate-900 border border-slate-800 p-4 rounded-xl shadow-lg">
-            <div class="text-xs text-slate-300 font-semibold flex items-center space-x-2">
-                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span>Filtered for high institutional participation & tight bid-ask spreads</span>
+        <!-- Filters / Guide -->
+        <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl shadow-lg flex flex-wrap justify-between items-center gap-4">
+            <div class="text-xs text-slate-300 space-y-1">
+                <div class="font-bold text-white">💡 How to trade this:</div>
+                <div><span class="text-emerald-400 font-bold">🔥 Heavy Inflow:</span> Institutional volume surge + positive price action (Prime Buy).</div>
             </div>
-
             <div class="relative w-full sm:w-64">
-                <i class="fa-solid fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 text-xs"></i>
-                <input type="text" id="searchInput" oninput="renderTable()" placeholder="Search ETF symbol..." class="w-full bg-slate-950 border border-slate-700 text-xs rounded-lg pl-8 pr-3 py-2 text-white focus:border-cyan-500 focus:outline-none placeholder-slate-500">
+                <input type="text" id="searchInput" oninput="renderTable()" placeholder="Search ETF (e.g. BANKBEES)..." class="w-full bg-slate-950 border border-slate-700 text-xs rounded-lg px-3 py-2 text-white focus:border-cyan-500 focus:outline-none placeholder-slate-500">
             </div>
         </div>
 
-        <!-- Data Table -->
+        <!-- Table -->
         <div class="bg-slate-900/90 border border-slate-800 rounded-xl overflow-hidden shadow-2xl">
             <div class="overflow-x-auto">
                 <table class="w-full text-left text-xs border-collapse">
                     <thead>
-                        <tr class="bg-slate-950/70 text-slate-400 uppercase font-semibold border-b border-slate-800 select-none">
+                        <tr class="bg-slate-950/70 text-slate-400 uppercase font-semibold border-b border-slate-800">
                             <th class="p-4">ETF Symbol</th>
                             <th class="p-4 text-right">LTP (₹)</th>
                             <th class="p-4 text-right">Change %</th>
-                            <th class="p-4 text-right">Daily Turnover</th>
-                            <th class="p-4 text-center">9-Month Trend Blocks (1 to 9)</th>
+                            <th class="p-4 text-right">Turnover (Cr)</th>
+                            <th class="p-4 text-center">Volume Surge Multiplier</th>
+                            <th class="p-4 text-center">Actionable Signal</th>
                         </tr>
                     </thead>
                     <tbody id="etfTableBody" class="divide-y divide-slate-800/60 font-medium">
-                        <tr><td colspan="5" class="p-8 text-center text-slate-500">Loading high-volume ETF data...</td></tr>
+                        <tr><td colspan="6" class="p-8 text-center text-slate-500">Loading actionable insights...</td></tr>
                     </tbody>
                 </table>
-            </div>
-            <div class="p-3 bg-slate-950 text-[11px] text-slate-500 flex justify-between">
-                <span id="rowCount">0 ETFs showing</span>
-                <span>Sorted by institutional liquidity</span>
             </div>
         </div>
     </main>
@@ -86,12 +71,11 @@
 
         async function init() {
             try {
-                // Cache-busting parameter (?t=) prevents Safari from remembering old states
                 const res = await fetch(DATA_URL + "?t=" + new Date().getTime());
                 allData = await res.json();
                 renderTable();
             } catch (err) {
-                document.getElementById('etfTableBody').innerHTML = `<tr><td colspan="5" class="p-8 text-center text-rose-400">Failed to load market data. Ensure the GitHub Action workflow has run successfully.</td></tr>`;
+                document.getElementById('etfTableBody').innerHTML = `<tr><td colspan="6" class="p-8 text-center text-rose-400">Run the workflow to generate actionable data.</td></tr>`;
             }
         }
 
@@ -102,22 +86,28 @@
 
             let filtered = allData.filter(etf => etf.symbol.includes(search));
 
-            document.getElementById('rowCount').innerText = `${filtered.length} ETFs showing`;
-
             if (filtered.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="5" class="p-8 text-center text-slate-500">No high-volume ETFs match your search.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="6" class="p-8 text-center text-slate-500">No ETFs match.</td></tr>`;
                 return;
             }
 
             filtered.forEach(etf => {
                 const isAcc = etf.change >= 0;
+                
+                // Determine Actionable Signal based on Surge and Price
+                let signal = "💤 Normal Flow";
+                let color = "slate";
 
-                // Build visual mini-trend blocks for the 9-month period
-                let trendHtml = `<div class="flex justify-center space-x-1">`;
-                etf.trend_9months.forEach(b => {
-                    trendHtml += `<div class="w-6 h-5 bg-slate-800 border border-slate-700 rounded flex items-center justify-center text-[9px] font-bold text-cyan-300" title="Block Avg Turnover: ₹${b.turnover_cr} Cr">₹${b.turnover_cr.toFixed(0)}</div>`;
-                });
-                trendHtml += `</div>`;
+                if (etf.surge_score >= 1.3 && etf.change > 0.5) {
+                    signal = "🔥 Heavy Institutional Inflow";
+                    color = "emerald";
+                } else if (etf.surge_score >= 1.2 && etf.change <= 0) {
+                    signal = "🎯 Dip Accumulation Zone";
+                    color = "cyan";
+                } else if (etf.surge_score < 0.8) {
+                    signal = "⚠️ Low Activity / Drip";
+                    color = "amber";
+                }
 
                 const row = `
                     <tr class="hover:bg-slate-800/40 border-b border-slate-800/40 transition">
@@ -125,7 +115,10 @@
                         <td class="p-4 text-right mono text-slate-200">₹${etf.ltp.toFixed(2)}</td>
                         <td class="p-4 text-right mono font-semibold text-${isAcc ? 'emerald' : 'rose'}-400">${isAcc ? '+' : ''}${etf.change.toFixed(2)}%</td>
                         <td class="p-4 text-right mono text-cyan-200">₹${etf.turnover_cr} Cr</td>
-                        <td class="p-4 text-center">${trendHtml}</td>
+                        <td class="p-4 text-center mono font-bold text-cyan-300">${etf.surge_score}x avg</td>
+                        <td class="p-4 text-center">
+                            <span class="px-3 py-1 rounded border border-${color}-500/30 text-[10px] font-bold bg-${color}-500/10 text-${color}-400 uppercase tracking-wide">${signal}</span>
+                        </td>
                     </tr>
                 `;
                 tbody.insertAdjacentHTML('beforeend', row);
