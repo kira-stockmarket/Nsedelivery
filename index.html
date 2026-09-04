@@ -3,119 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multi-Timeframe Delivery Terminal</title>
+    <title>High-Volume ETF Momentum Terminal</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; }
-        .tab-active { border-bottom: 2px solid #06b6d4; color: #06b6d4; font-weight: 700; }
-        .tab-inactive { color: #64748b; font-weight: 600; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen p-6">
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col">
 
-    <div class="max-w-7xl mx-auto space-y-6">
-        <div class="flex justify-between items-end border-b border-slate-800 pb-4">
+    <!-- Header -->
+    <header class="bg-slate-900 border-b border-slate-800 px-6 py-4 sticky top-0 z-30 flex flex-wrap justify-between items-center gap-4">
+        <div class="flex items-center space-x-3">
+            <div class="bg-gradient-to-tr from-cyan-600 to-blue-600 p-2.5 rounded-xl text-white shadow-lg">
+                <i class="fa-solid fa-chart-pie text-lg"></i>
+            </div>
             <div>
-                <h1 class="text-2xl font-bold text-white">Smart Money <span class="text-cyan-400">Terminal V3</span></h1>
-                <p class="text-xs text-slate-400 mt-1">Multi-Timeframe Institutional Flow Analysis</p>
+                <h1 class="text-xl font-bold text-white tracking-tight">HIGH-VOLUME ETF <span class="text-cyan-400">TERMINAL</span></h1>
+                <p class="text-xs text-slate-400">Strictly Liquid Institutional ETFs (>₹10 Cr Turnover)</p>
             </div>
-            
-            <!-- Timeframe Tabs -->
-            <div class="flex space-x-6 text-sm">
-                <button onclick="setTimeframe('daily')" id="tab-daily" class="pb-2 tab-inactive transition">Daily</button>
-                <button onclick="setTimeframe('weekly')" id="tab-weekly" class="pb-2 tab-active transition">Weekly (5-Day)</button>
-                <button onclick="setTimeframe('monthly')" id="tab-monthly" class="pb-2 tab-inactive transition">Monthly (20-Day)</button>
+        </div>
+        <div class="flex items-center space-x-4">
+            <div class="text-right hidden sm:block">
+                <div class="text-[10px] text-slate-400 font-bold uppercase">Strategy Filter</div>
+                <div class="text-xs font-bold text-cyan-400 mono">Active Liquidity Floor</div>
+            </div>
+            <button onclick="init()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-4 py-2 rounded-lg text-sm font-medium transition">
+                <i class="fa-solid fa-rotate-right mr-1.5"></i>Sync
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-1 p-6 max-w-7xl mx-auto w-full space-y-4">
+        
+        <!-- Controls & Search -->
+        <div class="flex flex-wrap justify-between items-center gap-4 bg-slate-900 border border-slate-800 p-4 rounded-xl shadow-lg">
+            <div class="text-xs text-slate-300 font-semibold flex items-center space-x-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span>Filtered for high institutional participation & tight bid-ask spreads</span>
+            </div>
+
+            <div class="relative w-full sm:w-64">
+                <i class="fa-solid fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 text-xs"></i>
+                <input type="text" id="searchInput" oninput="renderTable()" placeholder="Search ETF symbol..." class="w-full bg-slate-950 border border-slate-700 text-xs rounded-lg pl-8 pr-3 py-2 text-white focus:border-cyan-500 focus:outline-none placeholder-slate-500">
             </div>
         </div>
 
-        <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden shadow-2xl">
-            <table class="w-full text-left text-xs">
-                <thead>
-                    <tr class="bg-slate-950/70 text-slate-400 uppercase border-b border-slate-800">
-                        <th class="p-4 cursor-pointer" onclick="handleSort('symbol')">Symbol</th>
-                        <th class="p-4 text-right">LTP (₹)</th>
-                        <th class="p-4 text-right cursor-pointer" onclick="handleSort('change')">Net Change %</th>
-                        <th class="p-4 text-right cursor-pointer" onclick="handleSort('turnover')">Deliv Turnover (Cr)</th>
-                        <th class="p-4 w-48 cursor-pointer" onclick="handleSort('deliv')">Avg Delivery %</th>
-                        <th class="p-4 text-center">Trend Signal</th>
-                    </tr>
-                </thead>
-                <tbody id="tableBody" class="divide-y divide-slate-800/60 font-medium"></tbody>
-            </table>
+        <!-- Data Table -->
+        <div class="bg-slate-900/90 border border-slate-800 rounded-xl overflow-hidden shadow-2xl">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs border-collapse">
+                    <thead>
+                        <tr class="bg-slate-950/70 text-slate-400 uppercase font-semibold border-b border-slate-800 select-none">
+                            <th class="p-4">ETF Symbol</th>
+                            <th class="p-4 text-right">LTP (₹)</th>
+                            <th class="p-4 text-right">Change %</th>
+                            <th class="p-4 text-right">Daily Turnover</th>
+                            <th class="p-4 text-center">9-Month Trend Blocks (1 to 9)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="etfTableBody" class="divide-y divide-slate-800/60 font-medium">
+                        <tr><td colspan="5" class="p-8 text-center text-slate-500">Loading high-volume ETF data...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="p-3 bg-slate-950 text-[11px] text-slate-500 flex justify-between">
+                <span id="rowCount">0 ETFs showing</span>
+                <span>Sorted by institutional liquidity</span>
+            </div>
         </div>
-    </div>
+    </main>
 
     <script>
         const DATA_URL = 'https://raw.githubusercontent.com/kira-stockmarket/Nsedelivery/main/market_data.json';
         let allData = [];
-        let timeframe = 'weekly';
-        let sortCol = 'turnover';
-        let sortDesc = true;
 
         async function init() {
             try {
-                const res = await fetch(DATA_URL);
+                // Cache-busting parameter (?t=) prevents Safari from remembering old states
+                const res = await fetch(DATA_URL + "?t=" + new Date().getTime());
                 allData = await res.json();
                 renderTable();
             } catch (err) {
-                document.getElementById('tableBody').innerHTML = `<tr><td colspan="6" class="p-6 text-center text-rose-400">Run the Python script first to generate timeframe data.</td></tr>`;
+                document.getElementById('etfTableBody').innerHTML = `<tr><td colspan="5" class="p-8 text-center text-rose-400">Failed to load market data. Ensure the GitHub Action workflow has run successfully.</td></tr>`;
             }
         }
 
-        function setTimeframe(tf) {
-            timeframe = tf;
-            document.querySelectorAll('button[id^="tab-"]').forEach(b => {
-                b.classList.remove('tab-active');
-                b.classList.add('tab-inactive');
-            });
-            document.getElementById(`tab-${tf}`).classList.add('tab-active');
-            renderTable();
-        }
-
-        function handleSort(col) {
-            sortDesc = sortCol === col ? !sortDesc : true;
-            sortCol = col;
-            renderTable();
-        }
-
         function renderTable() {
-            const tbody = document.getElementById('tableBody');
+            const search = document.getElementById('searchInput').value.toUpperCase();
+            const tbody = document.getElementById('etfTableBody');
             tbody.innerHTML = '';
 
-            let sorted = [...allData].sort((a, b) => {
-                let vA = sortCol === 'symbol' ? a.symbol : (sortCol === 'ltp' ? a.ltp : a[timeframe][sortCol]);
-                let vB = sortCol === 'symbol' ? b.symbol : (sortCol === 'ltp' ? b.ltp : b[timeframe][sortCol]);
-                if (vA < vB) return sortDesc ? 1 : -1;
-                if (vA > vB) return sortDesc ? -1 : 1;
-                return 0;
-            });
+            let filtered = allData.filter(etf => etf.symbol.includes(search));
 
-            sorted.slice(0, 100).forEach(s => {
-                const tfData = s[timeframe];
-                const isAcc = tfData.change >= 0;
-                const isHigh = tfData.deliv >= 50;
-                let signal = isAcc && isHigh ? 'Accumulation' : (!isAcc && isHigh ? 'Distribution' : 'Noise');
-                let color = isAcc && isHigh ? 'emerald' : (!isAcc && isHigh ? 'rose' : 'slate');
+            document.getElementById('rowCount').innerText = `${filtered.length} ETFs showing`;
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" class="p-8 text-center text-slate-500">No high-volume ETFs match your search.</td></tr>`;
+                return;
+            }
+
+            filtered.forEach(etf => {
+                const isAcc = etf.change >= 0;
+
+                // Build visual mini-trend blocks for the 9-month period
+                let trendHtml = `<div class="flex justify-center space-x-1">`;
+                etf.trend_9months.forEach(b => {
+                    trendHtml += `<div class="w-6 h-5 bg-slate-800 border border-slate-700 rounded flex items-center justify-center text-[9px] font-bold text-cyan-300" title="Block Avg Turnover: ₹${b.turnover_cr} Cr">₹${b.turnover_cr.toFixed(0)}</div>`;
+                });
+                trendHtml += `</div>`;
 
                 const row = `
-                    <tr class="hover:bg-slate-800/50">
-                        <td class="p-4 font-bold text-white tracking-wide">${s.symbol}</td>
-                        <td class="p-4 text-right text-slate-200">₹${s.ltp.toFixed(2)}</td>
-                        <td class="p-4 text-right text-${isAcc ? 'emerald' : 'rose'}-400">${isAcc ? '+' : ''}${tfData.change.toFixed(2)}%</td>
-                        <td class="p-4 text-right text-cyan-200">₹${tfData.turnover.toFixed(1)}</td>
-                        <td class="p-4">
-                            <div class="flex justify-between mb-1 text-[11px]"><span class="text-white">${tfData.deliv.toFixed(1)}%</span></div>
-                            <div class="w-full bg-slate-800 rounded-full h-1.5"><div class="bg-${color}-500 h-1.5 rounded-full" style="width: ${tfData.deliv}%"></div></div>
-                        </td>
-                        <td class="p-4 text-center">
-                            <span class="px-2 py-1 rounded text-[10px] uppercase font-bold bg-${color}-500/10 text-${color}-400">${signal}</span>
-                        </td>
+                    <tr class="hover:bg-slate-800/40 border-b border-slate-800/40 transition">
+                        <td class="p-4 font-bold text-white mono text-sm">${etf.symbol}</td>
+                        <td class="p-4 text-right mono text-slate-200">₹${etf.ltp.toFixed(2)}</td>
+                        <td class="p-4 text-right mono font-semibold text-${isAcc ? 'emerald' : 'rose'}-400">${isAcc ? '+' : ''}${etf.change.toFixed(2)}%</td>
+                        <td class="p-4 text-right mono text-cyan-200">₹${etf.turnover_cr} Cr</td>
+                        <td class="p-4 text-center">${trendHtml}</td>
                     </tr>
                 `;
                 tbody.insertAdjacentHTML('beforeend', row);
             });
         }
+
         init();
     </script>
 </body>
