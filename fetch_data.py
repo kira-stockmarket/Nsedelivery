@@ -4,7 +4,6 @@ from jugaad_data.nse import full_bhavcopy_save
 import os
 import json
 
-# Broad universe of NSE ETFs
 ETF_WATCHLIST = [
     "NIFTYBEES", "BANKBEES", "ITBEES", "AUTOBEES", "PHARMABEES", 
     "GOLDBEES", "SILVERBEES", "MIDCPBEES", "CONSUMBEES", "PSUBNKBEES",
@@ -13,7 +12,7 @@ ETF_WATCHLIST = [
 ]
 
 def run():
-    print("Fetching High-Volume ETF Trend Data...")
+    print("Fetching ETF data for Actionable Surge Analysis...")
     current_date = datetime.today().date()
     historical_dfs = []
     
@@ -35,7 +34,6 @@ def run():
                     historical_dfs.append(df)
                 
                 os.remove(file_path)
-                print(f"Fetched session index {len(historical_dfs)}/{target_days}: {current_date}")
             except Exception:
                 pass
         current_date -= timedelta(days=1)
@@ -43,7 +41,6 @@ def run():
             break
 
     if not historical_dfs:
-        print("Error: No historical data fetched.")
         return
 
     master_df = pd.concat(historical_dfs)
@@ -60,13 +57,13 @@ def run():
         ltp = day_0['CLOSE_PRICE']
         prev_close = day_0['PREV_CLOSE']
         change_pct = ((ltp - prev_close) / prev_close) * 100 if prev_close > 0 else 0
-        turnover_cr = (ltp * day_0['TTL_TRD_QNTY']) / 10000000
+        current_turnover = (ltp * day_0['TTL_TRD_QNTY']) / 10000000
 
-        # STRICT LIQUIDITY FILTER: Skip ETFs with less than ₹10 Crore daily turnover
-        if turnover_cr < 10.0:
+        if current_turnover < 10.0:
             continue
 
-        # 9-Month rolling liquidity & price trend blocks
+        # Calculate 9-month historical average turnover to find spikes
+        historical_turnovers = []
         trend_9m = []
         for block in range(9):
             block_data = etf_df[(etf_df['T_INDEX'] >= block * 20) & (etf_df['T_INDEX'] < (block + 1) * 20)]
@@ -74,22 +71,28 @@ def run():
                 b_qty = block_data['TTL_TRD_QNTY'].mean()
                 b_price = block_data['CLOSE_PRICE'].mean()
                 b_turn = (b_price * b_qty) / 10000000
+                historical_turnovers.append(b_turn)
                 trend_9m.append({"block": block + 1, "turnover_cr": round(b_turn, 1), "price": round(b_price, 2)})
+
+        avg_historical_turnover = sum(historical_turnovers) / len(historical_turnovers) if historical_turnovers else current_turnover
+        # Surge multiplier (e.g., 1.5 means 50% higher volume than normal)
+        surge_score = round(current_turnover / avg_historical_turnover, 2) if avg_historical_turnover > 0 else 1.0
 
         etf_output.append({
             "symbol": symbol,
             "ltp": round(ltp, 2),
             "change": round(change_pct, 2),
-            "turnover_cr": round(turnover_cr, 2),
+            "turnover_cr": round(current_turnover, 2),
+            "surge_score": surge_score,
             "trend_9months": trend_9m
         })
 
-    # Sort high volume/turnover to the top
-    etf_output = sorted(etf_output, key=lambda x: x['turnover_cr'], reverse=True)
+    # Sort by highest surge score (most actionable institutional money flow first)
+    etf_output = sorted(etf_output, key=lambda x: x['surge_score'], reverse=True)
 
     with open('market_data.json', 'w') as f:
         json.dump(etf_output, f, indent=2)
-    print("High-Volume ETF JSON generated successfully!")
+    print("Actionable ETF JSON generated successfully!")
 
 if __name__ == "__main__":
     run()
