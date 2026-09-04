@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Money Delivery Terminal</title>
+    <title>Smart Money Pro Terminal</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -13,85 +13,194 @@
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: #0f172a; }
         ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        th { cursor: pointer; transition: color 0.2s; }
+        th:hover { color: #fff; }
     </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col">
 
-    <header class="bg-slate-900 border-b border-slate-800 px-6 py-3.5 sticky top-0 z-30 flex justify-between items-center">
+    <!-- Header -->
+    <header class="bg-slate-900 border-b border-slate-800 px-6 py-4 sticky top-0 z-30 flex flex-wrap justify-between items-center gap-4">
         <div class="flex items-center space-x-3">
-            <div class="bg-gradient-to-tr from-cyan-600 to-blue-600 p-2.5 rounded-xl text-white">
-                <i class="fa-solid fa-layer-group text-lg"></i>
+            <div class="bg-gradient-to-tr from-cyan-600 to-blue-600 p-2.5 rounded-xl text-white shadow-lg">
+                <i class="fa-solid fa-radar text-lg"></i>
             </div>
             <div>
-                <h1 class="text-lg font-bold text-white">SMART MONEY <span class="text-cyan-400">TERMINAL</span></h1>
-                <p class="text-xs text-slate-400">Live Delivery Data</p>
+                <h1 class="text-xl font-bold text-white tracking-tight">ACTION <span class="text-cyan-400">TERMINAL</span></h1>
+                <p class="text-xs text-slate-400">Institutional Delivery Screener</p>
             </div>
         </div>
-        <button onclick="fetchMarketData()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 px-3 py-1.5 rounded-lg text-xs font-medium transition">
-            <i class="fa-solid fa-rotate-right mr-1.5"></i>Refresh Data
-        </button>
+        <div class="flex items-center space-x-4">
+            <div class="text-right hidden sm:block">
+                <div class="text-[10px] text-slate-400 font-bold uppercase">Total Tracked Flow</div>
+                <div class="text-lg font-bold text-emerald-400 mono" id="totalFlow">₹0 Cr</div>
+            </div>
+            <button onclick="fetchMarketData()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-4 py-2 rounded-lg text-sm font-medium transition">
+                <i class="fa-solid fa-rotate-right mr-1.5"></i>Sync
+            </button>
+        </div>
     </header>
 
-    <main class="flex-1 p-6 max-w-7xl mx-auto w-full">
+    <!-- Controls & Filters -->
+    <main class="flex-1 p-6 max-w-7xl mx-auto w-full space-y-4">
+        <div class="flex flex-wrap justify-between items-center gap-4 bg-slate-900 border border-slate-800 p-4 rounded-xl shadow-lg">
+            
+            <!-- Filter Buttons -->
+            <div class="flex space-x-2 text-xs font-semibold">
+                <button onclick="setFilter('ALL')" id="btn-ALL" class="px-4 py-2 rounded-lg bg-cyan-600 text-white border border-cyan-500 transition filter-btn">All Stocks</button>
+                <button onclick="setFilter('ACCUMULATION')" id="btn-ACCUMULATION" class="px-4 py-2 rounded-lg bg-slate-800 text-emerald-400 border border-slate-700 hover:bg-slate-700 transition filter-btn">Strong Accumulation</button>
+                <button onclick="setFilter('DISTRIBUTION')" id="btn-DISTRIBUTION" class="px-4 py-2 rounded-lg bg-slate-800 text-rose-400 border border-slate-700 hover:bg-slate-700 transition filter-btn">Heavy Distribution</button>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="relative w-full sm:w-64">
+                <i class="fa-solid fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 text-sm"></i>
+                <input type="text" id="searchInput" oninput="renderTable()" placeholder="Search symbol..." class="w-full bg-slate-950 border border-slate-700 text-sm rounded-lg pl-9 pr-4 py-2 text-white focus:border-cyan-500 focus:outline-none placeholder-slate-500">
+            </div>
+        </div>
+
+        <!-- Data Table -->
         <div class="bg-slate-900/90 border border-slate-800 rounded-xl overflow-hidden shadow-2xl">
             <div class="overflow-x-auto">
                 <table class="w-full text-left text-xs border-collapse">
                     <thead>
-                        <tr class="bg-slate-950/70 text-slate-400 uppercase font-semibold border-b border-slate-800">
-                            <th class="p-3.5">Symbol</th>
-                            <th class="p-3.5 text-right">LTP (₹)</th>
-                            <th class="p-3.5 text-right">Change %</th>
-                            <th class="p-3.5 text-right">Turnover (Cr)</th>
-                            <th class="p-3.5 w-44">Delivery %</th>
-                            <th class="p-3.5 text-center">Signal</th>
+                        <tr class="bg-slate-950/70 text-slate-400 uppercase font-semibold border-b border-slate-800 select-none">
+                            <th class="p-4" onclick="handleSort('symbol')">Symbol <i class="fa-solid fa-sort ml-1 opacity-40"></i></th>
+                            <th class="p-4 text-right" onclick="handleSort('ltp')">LTP (₹) <i class="fa-solid fa-sort ml-1 opacity-40"></i></th>
+                            <th class="p-4 text-right" onclick="handleSort('change')">Change <i class="fa-solid fa-sort ml-1 opacity-40"></i></th>
+                            <th class="p-4 text-right" onclick="handleSort('turnoverCr')">Turnover (Cr) <i class="fa-solid fa-sort ml-1 opacity-40"></i></th>
+                            <th class="p-4 w-48" onclick="handleSort('delivery')">Delivery % <i class="fa-solid fa-sort ml-1 opacity-40"></i></th>
+                            <th class="p-4 text-center">Conviction Signal</th>
                         </tr>
                     </thead>
                     <tbody id="stocksTableBody" class="divide-y divide-slate-800/60 font-medium">
-                        <tr><td colspan="6" class="p-8 text-center text-slate-500">Loading daily market data...</td></tr>
+                        <!-- Data will inject here -->
                     </tbody>
                 </table>
+            </div>
+            <div class="p-3 bg-slate-950 text-[11px] text-slate-500 flex justify-between">
+                <span id="rowCount">0 showing</span>
+                <span>Click column headers to sort</span>
             </div>
         </div>
     </main>
 
     <script>
-        // This is your exact GitHub data link
+        // Update this URL if needed
         const DATA_URL = 'https://raw.githubusercontent.com/kira-stockmarket/Nsedelivery/main/market_data.json';
+        
+        let allData = [];
+        let currentFilter = 'ALL';
+        let sortCol = 'turnoverCr';
+        let sortDesc = true;
 
         async function fetchMarketData() {
             try {
-                const response = await fetch(DATA_URL);
-                if (!response.ok) throw new Error("Data not ready yet");
-                const data = await response.json();
+                const res = await fetch(DATA_URL);
+                allData = await res.json();
                 
-                const tbody = document.getElementById('stocksTableBody');
-                tbody.innerHTML = ''; 
+                // Calculate total flow
+                const totalFlow = allData.reduce((sum, item) => sum + item.turnoverCr, 0);
+                document.getElementById('totalFlow').innerText = `₹${totalFlow.toLocaleString('en-IN', {maximumFractionDigits: 0})} Cr`;
                 
-                data.forEach(s => {
-                    const isAcc = s.change >= 0;
-                    const signalText = isAcc ? 'Accumulation' : 'Distribution';
-                    const color = isAcc ? 'emerald' : 'rose';
-                    
-                    const row = `
-                        <tr class="hover:bg-slate-800/40 border-b border-slate-800/40">
-                            <td class="p-3.5 font-bold text-white mono">${s.symbol}</td>
-                            <td class="p-3.5 text-right mono">₹${s.ltp.toFixed(2)}</td>
-                            <td class="p-3.5 text-right mono text-${color}-400">${s.change > 0 ? '+' : ''}${s.change.toFixed(2)}%</td>
-                            <td class="p-3.5 text-right mono">₹${s.turnoverCr.toFixed(1)}</td>
-                            <td class="p-3.5">
-                                <div class="flex justify-between mb-1 mono text-[11px]"><span class="font-bold text-white">${s.delivery.toFixed(1)}%</span></div>
-                                <div class="w-full bg-slate-800 rounded-full h-1.5"><div class="bg-${color}-500 h-1.5 rounded-full" style="width: ${s.delivery}%"></div></div>
-                            </td>
-                            <td class="p-3.5 text-center">
-                                <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-${color}-500/10 text-${color}-400 border border-${color}-500/20">${signalText}</span>
-                            </td>
-                        </tr>
-                    `;
-                    tbody.insertAdjacentHTML('beforeend', row);
-                });
-            } catch (error) {
-                document.getElementById('stocksTableBody').innerHTML = `<tr><td colspan="6" class="p-8 text-center text-slate-500">Data for today has not been generated yet. Please trigger the Python script.</td></tr>`;
+                renderTable();
+            } catch (err) {
+                document.getElementById('stocksTableBody').innerHTML = `<tr><td colspan="6" class="p-8 text-center text-rose-400">Failed to load data.</td></tr>`;
             }
+        }
+
+        function setFilter(filterType) {
+            currentFilter = filterType;
+            // Update button styles
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('bg-cyan-600', 'text-white', 'border-cyan-500');
+                btn.classList.add('bg-slate-800', 'border-slate-700');
+            });
+            const activeBtn = document.getElementById(`btn-${filterType}`);
+            activeBtn.classList.remove('bg-slate-800', 'border-slate-700');
+            activeBtn.classList.add('bg-cyan-600', 'text-white', 'border-cyan-500');
+            
+            renderTable();
+        }
+
+        function handleSort(col) {
+            if (sortCol === col) {
+                sortDesc = !sortDesc;
+            } else {
+                sortCol = col;
+                sortDesc = true;
+            }
+            renderTable();
+        }
+
+        function renderTable() {
+            const search = document.getElementById('searchInput').value.toUpperCase();
+            const tbody = document.getElementById('stocksTableBody');
+            tbody.innerHTML = '';
+
+            // Filter data
+            let filtered = allData.filter(s => {
+                const matchSearch = s.symbol.includes(search);
+                let matchFilter = true;
+                
+                // Refined Actionable Logic
+                if (currentFilter === 'ACCUMULATION') matchFilter = s.change > 0 && s.delivery > 50;
+                if (currentFilter === 'DISTRIBUTION') matchFilter = s.change < 0 && s.delivery > 50;
+                
+                return matchSearch && matchFilter;
+            });
+
+            // Sort data
+            filtered.sort((a, b) => {
+                let valA = a[sortCol];
+                let valB = b[sortCol];
+                if (typeof valA === 'string') valA = valA.toUpperCase();
+                if (typeof valB === 'string') valB = valB.toUpperCase();
+                
+                if (valA < valB) return sortDesc ? 1 : -1;
+                if (valA > valB) return sortDesc ? -1 : 1;
+                return 0;
+            });
+
+            document.getElementById('rowCount').innerText = `${filtered.length} securities showing`;
+
+            if(filtered.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" class="p-8 text-center text-slate-500">No stocks match your filters.</td></tr>`;
+                return;
+            }
+
+            // Render Rows
+            filtered.forEach(s => {
+                const isAcc = s.change >= 0;
+                const isHighConviction = s.delivery >= 55;
+                
+                let signalText, color;
+                if (isAcc && isHighConviction) { signalText = 'Strong Acc'; color = 'emerald'; }
+                else if (!isAcc && isHighConviction) { signalText = 'Heavy Dist'; color = 'rose'; }
+                else if (isAcc) { signalText = 'Speculative'; color = 'amber'; }
+                else { signalText = 'Weak Drift'; color = 'purple'; }
+                
+                const row = `
+                    <tr class="hover:bg-slate-800/60 border-b border-slate-800/40 transition">
+                        <td class="p-4 font-bold text-white mono tracking-wide">${s.symbol}</td>
+                        <td class="p-4 text-right mono text-slate-200">₹${s.ltp.toFixed(2)}</td>
+                        <td class="p-4 text-right mono font-semibold text-${isAcc ? 'emerald' : 'rose'}-400">${isAcc ? '+' : ''}${s.change.toFixed(2)}%</td>
+                        <td class="p-4 text-right mono text-cyan-100">₹${s.turnoverCr.toFixed(1)}</td>
+                        <td class="p-4">
+                            <div class="flex justify-between mb-1 mono text-[11px]">
+                                <span class="font-bold text-white">${s.delivery.toFixed(1)}%</span>
+                            </div>
+                            <div class="w-full bg-slate-800 rounded-full h-1.5">
+                                <div class="bg-${color}-500 h-1.5 rounded-full" style="width: ${s.delivery}%"></div>
+                            </div>
+                        </td>
+                        <td class="p-4 text-center">
+                            <span class="px-2.5 py-1 rounded border border-${color}-500/30 text-[10px] font-bold bg-${color}-500/10 text-${color}-400 uppercase tracking-wider">${signalText}</span>
+                        </td>
+                    </tr>
+                `;
+                tbody.insertAdjacentHTML('beforeend', row);
+            });
         }
         
         document.addEventListener('DOMContentLoaded', fetchMarketData);
