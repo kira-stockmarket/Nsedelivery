@@ -1,649 +1,649 @@
 [
   {
-    "symbol": "PHARMABEES",
-    "ltp": 27.32,
-    "change": -0.18,
-    "turnover_cr": 12.25,
-    "surge_score": 0.76,
+    "symbol": "BANKBEES",
+    "ltp": 591.58,
+    "change": -0.77,
+    "turnover_cr": 55.01,
+    "surge_score": 0.93,
     "trend_9months": [
       {
         "block": 1,
-        "turnover_cr": 10.9,
-        "price": 27.35
+        "turnover_cr": 33.5,
+        "price": 595.84
       },
       {
         "block": 2,
-        "turnover_cr": 14.2,
-        "price": 26.85
+        "turnover_cr": 44.3,
+        "price": 594.97
       },
       {
         "block": 3,
-        "turnover_cr": 18.5,
-        "price": 25.73
+        "turnover_cr": 63.4,
+        "price": 598.03
       },
       {
         "block": 4,
-        "turnover_cr": 18.4,
-        "price": 25.1
+        "turnover_cr": 76.3,
+        "price": 564.36
       },
       {
         "block": 5,
-        "turnover_cr": 27.9,
-        "price": 24.1
+        "turnover_cr": 62.2,
+        "price": 569.25
       },
       {
         "block": 6,
-        "turnover_cr": 16.5,
-        "price": 22.77
+        "turnover_cr": 98.6,
+        "price": 555.19
       },
       {
         "block": 7,
-        "turnover_cr": 15.7,
-        "price": 23.48
+        "turnover_cr": 76.3,
+        "price": 588.14
       },
       {
         "block": 8,
-        "turnover_cr": 9.6,
-        "price": 22.67
+        "turnover_cr": 35.5,
+        "price": 622.93
       },
       {
         "block": 9,
-        "turnover_cr": 13.8,
-        "price": 23.05
-      }
-    ]
-  },
-  {
-    "symbol": "MID150BEES",
-    "ltp": 240.15,
-    "change": 0.0,
-    "turnover_cr": 15.71,
-    "surge_score": 0.65,
-    "trend_9months": [
-      {
-        "block": 1,
-        "turnover_cr": 19.7,
-        "price": 242.21
-      },
-      {
-        "block": 2,
-        "turnover_cr": 17.1,
-        "price": 238.88
-      },
-      {
-        "block": 3,
-        "turnover_cr": 19.0,
-        "price": 236.02
-      },
-      {
-        "block": 4,
-        "turnover_cr": 21.2,
-        "price": 231.0
-      },
-      {
-        "block": 5,
-        "turnover_cr": 22.0,
-        "price": 229.54
-      },
-      {
-        "block": 6,
-        "turnover_cr": 48.8,
-        "price": 211.77
-      },
-      {
-        "block": 7,
-        "turnover_cr": 30.9,
-        "price": 217.82
-      },
-      {
-        "block": 8,
-        "turnover_cr": 19.1,
-        "price": 225.39
-      },
-      {
-        "block": 9,
-        "turnover_cr": 20.0,
-        "price": 226.85
-      }
-    ]
-  },
-  {
-    "symbol": "JUNIORBEES",
-    "ltp": 791.07,
-    "change": 0.3,
-    "turnover_cr": 22.47,
-    "surge_score": 0.59,
-    "trend_9months": [
-      {
-        "block": 1,
-        "turnover_cr": 31.1,
-        "price": 801.21
-      },
-      {
-        "block": 2,
-        "turnover_cr": 26.0,
-        "price": 786.82
-      },
-      {
-        "block": 3,
-        "turnover_cr": 35.3,
-        "price": 778.46
-      },
-      {
-        "block": 4,
-        "turnover_cr": 32.0,
-        "price": 755.28
-      },
-      {
-        "block": 5,
-        "turnover_cr": 33.4,
-        "price": 758.97
-      },
-      {
-        "block": 6,
-        "turnover_cr": 62.9,
-        "price": 694.66
-      },
-      {
-        "block": 7,
-        "turnover_cr": 52.9,
-        "price": 723.34
-      },
-      {
-        "block": 8,
-        "turnover_cr": 33.6,
-        "price": 740.17
-      },
-      {
-        "block": 9,
-        "turnover_cr": 36.6,
-        "price": 740.26
+        "turnover_cr": 39.7,
+        "price": 613.94
       }
     ]
   },
   {
     "symbol": "SETFGOLD",
-    "ltp": 131.22,
-    "change": 0.77,
-    "turnover_cr": 58.03,
-    "surge_score": 0.51,
+    "ltp": 129.56,
+    "change": -1.27,
+    "turnover_cr": 97.54,
+    "surge_score": 0.87,
     "trend_9months": [
       {
         "block": 1,
-        "turnover_cr": 65.6,
-        "price": 131.81
+        "turnover_cr": 64.6,
+        "price": 131.86
       },
       {
         "block": 2,
-        "turnover_cr": 45.3,
-        "price": 121.68
+        "turnover_cr": 48.6,
+        "price": 122.08
       },
       {
         "block": 3,
-        "turnover_cr": 68.3,
-        "price": 122.69
+        "turnover_cr": 66.6,
+        "price": 122.31
       },
       {
         "block": 4,
-        "turnover_cr": 53.3,
-        "price": 131.54
+        "turnover_cr": 54.7,
+        "price": 131.26
       },
       {
         "block": 5,
-        "turnover_cr": 75.4,
-        "price": 128.72
+        "turnover_cr": 74.7,
+        "price": 128.96
       },
       {
         "block": 6,
-        "turnover_cr": 140.5,
-        "price": 125.2
+        "turnover_cr": 120.9,
+        "price": 125.95
       },
       {
         "block": 7,
-        "turnover_cr": 140.5,
-        "price": 134.76
+        "turnover_cr": 161.4,
+        "price": 133.74
       },
       {
         "block": 8,
-        "turnover_cr": 241.5,
-        "price": 132.54
+        "turnover_cr": 224.4,
+        "price": 132.67
       },
       {
         "block": 9,
-        "turnover_cr": 186.1,
-        "price": 120.8
+        "turnover_cr": 196.0,
+        "price": 121.53
       }
     ]
   },
   {
-    "symbol": "ITBEES",
-    "ltp": 34.09,
-    "change": -0.58,
-    "turnover_cr": 28.99,
-    "surge_score": 0.45,
+    "symbol": "PHARMABEES",
+    "ltp": 27.4,
+    "change": 0.29,
+    "turnover_cr": 11.31,
+    "surge_score": 0.7,
     "trend_9months": [
       {
         "block": 1,
-        "turnover_cr": 28.7,
-        "price": 34.3
+        "turnover_cr": 10.8,
+        "price": 27.35
       },
       {
         "block": 2,
-        "turnover_cr": 71.8,
-        "price": 33.18
+        "turnover_cr": 14.4,
+        "price": 26.89
       },
       {
         "block": 3,
-        "turnover_cr": 78.0,
-        "price": 30.52
+        "turnover_cr": 18.2,
+        "price": 25.8
       },
       {
         "block": 4,
-        "turnover_cr": 56.7,
-        "price": 32.13
+        "turnover_cr": 17.0,
+        "price": 25.07
       },
       {
         "block": 5,
-        "turnover_cr": 58.0,
-        "price": 32.34
+        "turnover_cr": 29.7,
+        "price": 24.22
       },
       {
         "block": 6,
-        "turnover_cr": 61.1,
-        "price": 33.59
+        "turnover_cr": 16.2,
+        "price": 22.79
       },
       {
         "block": 7,
-        "turnover_cr": 80.4,
-        "price": 33.03
+        "turnover_cr": 16.3,
+        "price": 23.45
       },
       {
         "block": 8,
-        "turnover_cr": 113.0,
-        "price": 39.29
+        "turnover_cr": 9.5,
+        "price": 22.71
       },
       {
         "block": 9,
-        "turnover_cr": 37.1,
-        "price": 41.96
-      }
-    ]
-  },
-  {
-    "symbol": "HDFCGOLD",
-    "ltp": 131.45,
-    "change": 0.83,
-    "turnover_cr": 44.05,
-    "surge_score": 0.45,
-    "trend_9months": [
-      {
-        "block": 1,
-        "turnover_cr": 51.4,
-        "price": 132.03
-      },
-      {
-        "block": 2,
-        "turnover_cr": 31.5,
-        "price": 121.86
-      },
-      {
-        "block": 3,
-        "turnover_cr": 46.3,
-        "price": 122.86
-      },
-      {
-        "block": 4,
-        "turnover_cr": 49.7,
-        "price": 131.8
-      },
-      {
-        "block": 5,
-        "turnover_cr": 67.8,
-        "price": 128.93
-      },
-      {
-        "block": 6,
-        "turnover_cr": 116.5,
-        "price": 125.29
-      },
-      {
-        "block": 7,
-        "turnover_cr": 142.9,
-        "price": 134.94
-      },
-      {
-        "block": 8,
-        "turnover_cr": 218.1,
-        "price": 132.58
-      },
-      {
-        "block": 9,
-        "turnover_cr": 160.3,
-        "price": 120.99
-      }
-    ]
-  },
-  {
-    "symbol": "GOLDBEES",
-    "ltp": 127.17,
-    "change": 0.74,
-    "turnover_cr": 259.62,
-    "surge_score": 0.4,
-    "trend_9months": [
-      {
-        "block": 1,
-        "turnover_cr": 390.3,
-        "price": 127.73
-      },
-      {
-        "block": 2,
-        "turnover_cr": 226.9,
-        "price": 117.92
-      },
-      {
-        "block": 3,
-        "turnover_cr": 335.8,
-        "price": 118.94
-      },
-      {
-        "block": 4,
-        "turnover_cr": 312.1,
-        "price": 127.53
-      },
-      {
-        "block": 5,
-        "turnover_cr": 399.1,
-        "price": 124.84
-      },
-      {
-        "block": 6,
-        "turnover_cr": 791.4,
-        "price": 121.39
-      },
-      {
-        "block": 7,
-        "turnover_cr": 844.9,
-        "price": 130.67
-      },
-      {
-        "block": 8,
-        "turnover_cr": 1600.9,
-        "price": 128.32
-      },
-      {
-        "block": 9,
-        "turnover_cr": 983.9,
-        "price": 117.11
+        "turnover_cr": 13.7,
+        "price": 23.01
       }
     ]
   },
   {
     "symbol": "NIFTYBEES",
-    "ltp": 273.27,
-    "change": 0.23,
-    "turnover_cr": 86.43,
-    "surge_score": 0.36,
+    "ltp": 271.21,
+    "change": -0.75,
+    "turnover_cr": 160.61,
+    "surge_score": 0.66,
     "trend_9months": [
       {
         "block": 1,
-        "turnover_cr": 132.9,
-        "price": 276.21
+        "turnover_cr": 131.8,
+        "price": 275.74
       },
       {
         "block": 2,
-        "turnover_cr": 150.2,
-        "price": 275.8
+        "turnover_cr": 150.4,
+        "price": 276.05
       },
       {
         "block": 3,
-        "turnover_cr": 204.6,
-        "price": 273.37
+        "turnover_cr": 196.6,
+        "price": 273.6
       },
       {
         "block": 4,
-        "turnover_cr": 195.3,
-        "price": 267.05
+        "turnover_cr": 201.2,
+        "price": 267.21
       },
       {
         "block": 5,
-        "turnover_cr": 258.0,
-        "price": 272.04
+        "turnover_cr": 255.0,
+        "price": 271.65
       },
       {
         "block": 6,
-        "turnover_cr": 448.3,
-        "price": 263.95
+        "turnover_cr": 426.0,
+        "price": 264.95
       },
       {
         "block": 7,
-        "turnover_cr": 380.0,
-        "price": 275.7
+        "turnover_cr": 409.8,
+        "price": 273.94
       },
       {
         "block": 8,
-        "turnover_cr": 203.4,
-        "price": 289.54
+        "turnover_cr": 198.4,
+        "price": 289.87
       },
       {
         "block": 9,
-        "turnover_cr": 204.4,
-        "price": 291.65
+        "turnover_cr": 207.7,
+        "price": 291.19
+      }
+    ]
+  },
+  {
+    "symbol": "MID150BEES",
+    "ltp": 239.11,
+    "change": -0.43,
+    "turnover_cr": 15.34,
+    "surge_score": 0.63,
+    "trend_9months": [
+      {
+        "block": 1,
+        "turnover_cr": 19.4,
+        "price": 242.02
+      },
+      {
+        "block": 2,
+        "turnover_cr": 17.2,
+        "price": 239.06
+      },
+      {
+        "block": 3,
+        "turnover_cr": 18.9,
+        "price": 236.3
+      },
+      {
+        "block": 4,
+        "turnover_cr": 21.3,
+        "price": 231.21
+      },
+      {
+        "block": 5,
+        "turnover_cr": 21.5,
+        "price": 229.66
+      },
+      {
+        "block": 6,
+        "turnover_cr": 47.2,
+        "price": 213.06
+      },
+      {
+        "block": 7,
+        "turnover_cr": 33.5,
+        "price": 216.6
+      },
+      {
+        "block": 8,
+        "turnover_cr": 18.5,
+        "price": 225.83
+      },
+      {
+        "block": 9,
+        "turnover_cr": 20.7,
+        "price": 226.31
+      }
+    ]
+  },
+  {
+    "symbol": "ITBEES",
+    "ltp": 33.33,
+    "change": -2.23,
+    "turnover_cr": 35.43,
+    "surge_score": 0.55,
+    "trend_9months": [
+      {
+        "block": 1,
+        "turnover_cr": 28.5,
+        "price": 34.21
+      },
+      {
+        "block": 2,
+        "turnover_cr": 64.4,
+        "price": 33.33
+      },
+      {
+        "block": 3,
+        "turnover_cr": 84.4,
+        "price": 30.57
+      },
+      {
+        "block": 4,
+        "turnover_cr": 56.9,
+        "price": 32.12
+      },
+      {
+        "block": 5,
+        "turnover_cr": 58.9,
+        "price": 32.17
+      },
+      {
+        "block": 6,
+        "turnover_cr": 58.6,
+        "price": 33.72
+      },
+      {
+        "block": 7,
+        "turnover_cr": 79.3,
+        "price": 32.89
+      },
+      {
+        "block": 8,
+        "turnover_cr": 116.4,
+        "price": 38.93
+      },
+      {
+        "block": 9,
+        "turnover_cr": 34.6,
+        "price": 41.96
+      }
+    ]
+  },
+  {
+    "symbol": "JUNIORBEES",
+    "ltp": 786.26,
+    "change": -0.61,
+    "turnover_cr": 20.47,
+    "surge_score": 0.54,
+    "trend_9months": [
+      {
+        "block": 1,
+        "turnover_cr": 31.1,
+        "price": 800.07
+      },
+      {
+        "block": 2,
+        "turnover_cr": 25.8,
+        "price": 788.31
+      },
+      {
+        "block": 3,
+        "turnover_cr": 33.7,
+        "price": 778.75
+      },
+      {
+        "block": 4,
+        "turnover_cr": 32.8,
+        "price": 756.92
+      },
+      {
+        "block": 5,
+        "turnover_cr": 32.3,
+        "price": 758.18
+      },
+      {
+        "block": 6,
+        "turnover_cr": 60.6,
+        "price": 699.38
+      },
+      {
+        "block": 7,
+        "turnover_cr": 57.4,
+        "price": 718.97
+      },
+      {
+        "block": 8,
+        "turnover_cr": 32.5,
+        "price": 741.99
+      },
+      {
+        "block": 9,
+        "turnover_cr": 37.7,
+        "price": 739.0
       }
     ]
   },
   {
     "symbol": "PSUBNKBEES",
-    "ltp": 95.45,
-    "change": -0.24,
-    "turnover_cr": 12.26,
-    "surge_score": 0.36,
+    "ltp": 94.21,
+    "change": -1.3,
+    "turnover_cr": 15.94,
+    "surge_score": 0.47,
     "trend_9months": [
       {
         "block": 1,
-        "turnover_cr": 19.5,
-        "price": 96.25
+        "turnover_cr": 16.3,
+        "price": 96.14
       },
       {
         "block": 2,
-        "turnover_cr": 24.1,
-        "price": 94.26
+        "turnover_cr": 27.1,
+        "price": 94.35
       },
       {
         "block": 3,
-        "turnover_cr": 30.4,
-        "price": 95.37
+        "turnover_cr": 29.6,
+        "price": 95.3
       },
       {
         "block": 4,
-        "turnover_cr": 29.6,
-        "price": 91.43
+        "turnover_cr": 29.8,
+        "price": 91.81
       },
       {
         "block": 5,
-        "turnover_cr": 33.1,
-        "price": 95.02
+        "turnover_cr": 32.4,
+        "price": 94.47
       },
       {
         "block": 6,
-        "turnover_cr": 45.2,
-        "price": 93.91
+        "turnover_cr": 45.3,
+        "price": 94.3
       },
       {
         "block": 7,
-        "turnover_cr": 39.9,
-        "price": 101.88
+        "turnover_cr": 39.6,
+        "price": 101.0
       },
       {
         "block": 8,
-        "turnover_cr": 46.7,
-        "price": 101.55
+        "turnover_cr": 47.0,
+        "price": 102.12
       },
       {
         "block": 9,
-        "turnover_cr": 39.4,
-        "price": 97.23
+        "turnover_cr": 41.0,
+        "price": 97.51
       }
     ]
   },
   {
-    "symbol": "BANKBEES",
-    "ltp": 596.2,
-    "change": 0.03,
-    "turnover_cr": 20.58,
-    "surge_score": 0.35,
+    "symbol": "HDFCGOLD",
+    "ltp": 129.88,
+    "change": -1.19,
+    "turnover_cr": 42.06,
+    "surge_score": 0.43,
     "trend_9months": [
       {
         "block": 1,
-        "turnover_cr": 32.8,
-        "price": 596.09
+        "turnover_cr": 51.2,
+        "price": 132.08
       },
       {
         "block": 2,
-        "turnover_cr": 45.1,
-        "price": 595.17
+        "turnover_cr": 31.6,
+        "price": 122.26
       },
       {
         "block": 3,
-        "turnover_cr": 68.7,
-        "price": 597.48
+        "turnover_cr": 45.7,
+        "price": 122.49
       },
       {
         "block": 4,
-        "turnover_cr": 71.8,
-        "price": 562.54
+        "turnover_cr": 49.5,
+        "price": 131.51
       },
       {
         "block": 5,
-        "turnover_cr": 62.4,
-        "price": 570.72
+        "turnover_cr": 67.3,
+        "price": 129.18
       },
       {
         "block": 6,
-        "turnover_cr": 101.3,
-        "price": 552.64
+        "turnover_cr": 96.7,
+        "price": 126.05
       },
       {
         "block": 7,
-        "turnover_cr": 71.0,
-        "price": 593.14
+        "turnover_cr": 161.9,
+        "price": 133.92
       },
       {
         "block": 8,
-        "turnover_cr": 35.9,
-        "price": 621.51
+        "turnover_cr": 209.5,
+        "price": 132.7
       },
       {
         "block": 9,
-        "turnover_cr": 40.0,
-        "price": 614.14
+        "turnover_cr": 166.4,
+        "price": 121.74
+      }
+    ]
+  },
+  {
+    "symbol": "GOLDBEES",
+    "ltp": 125.58,
+    "change": -1.25,
+    "turnover_cr": 261.07,
+    "surge_score": 0.4,
+    "trend_9months": [
+      {
+        "block": 1,
+        "turnover_cr": 384.4,
+        "price": 127.78
+      },
+      {
+        "block": 2,
+        "turnover_cr": 233.8,
+        "price": 118.3
+      },
+      {
+        "block": 3,
+        "turnover_cr": 332.3,
+        "price": 118.59
+      },
+      {
+        "block": 4,
+        "turnover_cr": 307.1,
+        "price": 127.25
+      },
+      {
+        "block": 5,
+        "turnover_cr": 398.7,
+        "price": 125.07
+      },
+      {
+        "block": 6,
+        "turnover_cr": 677.4,
+        "price": 122.11
+      },
+      {
+        "block": 7,
+        "turnover_cr": 949.6,
+        "price": 129.71
+      },
+      {
+        "block": 8,
+        "turnover_cr": 1547.6,
+        "price": 128.45
+      },
+      {
+        "block": 9,
+        "turnover_cr": 1030.4,
+        "price": 117.83
       }
     ]
   },
   {
     "symbol": "HDFCSILVER",
-    "ltp": 222.7,
-    "change": 1.19,
-    "turnover_cr": 50.94,
-    "surge_score": 0.26,
+    "ltp": 219.9,
+    "change": -1.26,
+    "turnover_cr": 64.37,
+    "surge_score": 0.34,
     "trend_9months": [
       {
         "block": 1,
-        "turnover_cr": 76.5,
-        "price": 223.85
+        "turnover_cr": 75.7,
+        "price": 223.81
       },
       {
         "block": 2,
-        "turnover_cr": 53.7,
-        "price": 209.71
+        "turnover_cr": 54.0,
+        "price": 210.36
       },
       {
         "block": 3,
-        "turnover_cr": 113.8,
-        "price": 218.38
+        "turnover_cr": 113.5,
+        "price": 216.8
       },
       {
         "block": 4,
-        "turnover_cr": 109.6,
-        "price": 244.53
+        "turnover_cr": 101.2,
+        "price": 243.82
       },
       {
         "block": 5,
-        "turnover_cr": 107.3,
-        "price": 238.07
+        "turnover_cr": 115.3,
+        "price": 238.86
       },
       {
         "block": 6,
-        "turnover_cr": 156.0,
-        "price": 221.86
+        "turnover_cr": 136.9,
+        "price": 224.14
       },
       {
         "block": 7,
-        "turnover_cr": 246.4,
-        "price": 247.91
+        "turnover_cr": 252.8,
+        "price": 244.95
       },
       {
         "block": 8,
-        "turnover_cr": 464.2,
-        "price": 257.62
+        "turnover_cr": 455.8,
+        "price": 255.46
       },
       {
         "block": 9,
-        "turnover_cr": 413.9,
-        "price": 250.49
+        "turnover_cr": 403.4,
+        "price": 254.16
       }
     ]
   },
   {
     "symbol": "SILVERBEES",
-    "ltp": 222.78,
-    "change": 1.32,
-    "turnover_cr": 358.36,
-    "surge_score": 0.24,
+    "ltp": 219.96,
+    "change": -1.27,
+    "turnover_cr": 305.71,
+    "surge_score": 0.21,
     "trend_9months": [
       {
         "block": 1,
-        "turnover_cr": 549.8,
-        "price": 223.87
+        "turnover_cr": 539.4,
+        "price": 223.85
       },
       {
         "block": 2,
-        "turnover_cr": 452.7,
-        "price": 209.61
+        "turnover_cr": 452.8,
+        "price": 210.26
       },
       {
         "block": 3,
-        "turnover_cr": 744.7,
-        "price": 218.29
+        "turnover_cr": 743.2,
+        "price": 216.74
       },
       {
         "block": 4,
-        "turnover_cr": 646.4,
-        "price": 244.48
+        "turnover_cr": 609.7,
+        "price": 243.75
       },
       {
         "block": 5,
-        "turnover_cr": 809.3,
-        "price": 237.99
+        "turnover_cr": 834.2,
+        "price": 238.78
       },
       {
         "block": 6,
-        "turnover_cr": 1240.4,
-        "price": 221.73
+        "turnover_cr": 1072.7,
+        "price": 223.91
       },
       {
         "block": 7,
-        "turnover_cr": 1902.3,
-        "price": 247.8
+        "turnover_cr": 1976.0,
+        "price": 244.96
       },
       {
         "block": 8,
-        "turnover_cr": 3892.1,
-        "price": 256.43
+        "turnover_cr": 3782.7,
+        "price": 254.3
       },
       {
         "block": 9,
-        "turnover_cr": 3376.8,
-        "price": 249.12
+        "turnover_cr": 3286.8,
+        "price": 252.84
       }
     ]
   }
